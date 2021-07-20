@@ -14,7 +14,7 @@ const PostDetail = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null)
 
-    const postSlug = useParams()
+    const { postSlug } = useParams()
 
     useEffect(() => {
         fetchPosts();
