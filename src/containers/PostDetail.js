@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import {
     Container,
     Header,
+    Image,
   } from 'semantic-ui-react'
 import Message from '../components/Message';
 import Loaders from '../components/Loader';
@@ -38,7 +39,11 @@ const PostDetail = () => {
     return (
         <div>
             <Container text style={{ marginTop: '7em' }}>
+                
+                <Image src={post.thumbnail} size='small'/>
                 <Header as='h1'>{post.title}</Header>
+                <Header as='h4'>Last Updated: {`${new Date(post.last_updated).toLocaleDateString()}`}</Header>
+                
 
                 {loading && <Loaders />}
                 {error && <Message negative message={error} />}
