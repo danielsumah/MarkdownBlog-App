@@ -1,45 +1,15 @@
 import React from 'react'
 import { Header, Item } from 'semantic-ui-react'
-import { useState, useEffect } from 'react'
 import Loaders from '../components/Loader'
-import axios from 'axios'
 import Message from '../components/Message'
 import { NavLink } from 'react-router-dom'
+import { api } from '../api'
+import { useFetch } from '../helpers'
+
 
 const PostList = () => {
-    const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null)
-
-    useEffect(() => {
-        fetchPosts();
-        // getRecipes();
-    }, [])
-
-
-    const fetchPosts = async () => {
-        setLoading(true);
-
-        try {
-
-            console.log("old --------")
-            console.log(posts)
-            const res = await axios.get('http://127.0.0.1:8000/api/posts/');
-            const data = res.data
-            console.log("fetched data below --------")
-            console.log(data)
-            console.log("new state below")
-            setPosts(data)
-
-
-
-
-            setLoading(false);
-        } catch (error) {
-            setError(error.message);
-            setLoading(false)
-        }
-    }
+    
+    const {data, loading, error} = useFetch(api.get.list_endpoint)
 
     return (
         <div>
@@ -48,9 +18,9 @@ const PostList = () => {
             {loading && <Loaders />}
             {error && <Message negative message={error} />}
             <Item.Group>
-                {posts.map(post => (
-                    <div>
-                        <Item key={post.id}>
+                {data.map(post => (
+                    <div key={post.id}>
+                        <Item>
                             <Item.Image size='small' src={post.thumbnail} />
 
                             <Item.Content>
