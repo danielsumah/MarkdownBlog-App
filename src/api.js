@@ -7,7 +7,12 @@ export const api = {
     },
 
     post:{
-        create_endpoint: `${baseURL}/api/post/creates/`,
+        create_endpoint: `${baseURL}/api/post/create/`,
         update_endpoint: slug => `${baseURL}/api/post/${slug}/update/`,
+    },
+
+
+    delete:{
+        delete_endpoint: slug => `${baseURL}/api/post/${slug}/delete/`
     }
 }

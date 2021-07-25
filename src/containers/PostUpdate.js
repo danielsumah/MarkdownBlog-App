@@ -72,6 +72,7 @@ const PostUpdateForm = ({postSlug, initialTitle, initialContent, initialThumbnai
     return (
         <div>
             <Header>Update Post</Header>
+            <Divider/>
             {error && <Message negative message={error}/>}
             <Form onSubmit={submit_form}>
                 <Form.Field>
