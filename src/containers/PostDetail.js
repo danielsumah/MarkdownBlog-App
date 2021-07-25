@@ -1,20 +1,22 @@
 import React from 'react';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import {
     Container,
     Header,
     Image,
+    Button,
+    Icon,
   } from 'semantic-ui-react'
+
+import { NavLink } from 'react-router-dom';
 import Message from '../components/Message';
 import Loaders from '../components/Loader';
 import { api } from '../api';
 import { useFetch } from '../helpers';
 import { useParams } from 'react-router';
 
+
 const PostDetail = () => {
-    const {postSlug} = useParams()
-    
+    const {postSlug} = useParams()    
     const {data, loading, error} = useFetch(api.get.post_detail_endpoint(postSlug))
 
     return (
@@ -33,9 +35,19 @@ const PostDetail = () => {
                 {error && <Message negative message={error} />}
 
                 {data && (
-                    <p>{data.content}</p>
+                    <>
+                        <p>{data.content}</p>
+
+                        <NavLink to={`/post/${data.slug}/update`} >
+                            <Button icon labelPosition='left'>
+                                <Icon name='edit' />
+                                Edit Post
+                            </Button>
+                        </NavLink>
+                    </>
                 )}            
             </Container>
+        
         </div>
     )
 }

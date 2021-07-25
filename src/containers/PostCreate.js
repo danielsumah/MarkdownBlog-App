@@ -6,6 +6,13 @@ import Message from '../components/Message'
 import { history } from '../helpers'
 import { api } from '../api'
 
+import MarkdownIt from 'markdown-it';
+import MdEditor from 'react-markdown-editor-lite';
+// import style manually
+import 'react-markdown-editor-lite/lib/index.css';
+
+ 
+
 const PostCreate = () => {
 
     const file_input_ref = useRef()
@@ -17,9 +24,17 @@ const PostCreate = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null)
 
+        // Initialize a markdown parser
+    const mdParser = new MarkdownIt(/* Markdown-it options */);
+
+    // Finish!
+    function handleEditorChange({ html, text }) {
+        // console.log('handleEditorChange', html, text);
+        setContent(text)
+    }
+
     function submit_form(e){
         e.preventDefault();
-
         setLoading(true);
 
         const formData = new FormData();
@@ -27,6 +42,7 @@ const PostCreate = () => {
         formData.append('content', content)
         formData.append('thumbnail', thumbnail)
 
+        console.log(content)
         console.log(FormData)
 
         axios.post(api.post.create_endpoint,formData,{
@@ -88,12 +104,12 @@ const PostCreate = () => {
                         onChange = {e=> setThumbnail(e.target.files[0])}
                     />
                 </Form.Field>
-                <Form.TextArea 
-                    label='Post Content' 
-                    placeholder='Write Post content here' 
-                    value= {content}
-                    onChange = {e => setContent(e.target.value)}
+                <MdEditor 
+                    style={{ height: '500px' }} 
+                    renderHTML={text => mdParser.render(text)} 
+                    onChange={handleEditorChange} 
                 />
+                
                 <Button primary
                         fluid 
                         type='submit'
@@ -101,6 +117,7 @@ const PostCreate = () => {
                     Create Post
                 </Button>
             </Form>
+        
         </div>
     )
 }

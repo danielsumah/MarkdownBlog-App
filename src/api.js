@@ -7,6 +7,7 @@ export const api = {
     },
 
     post:{
-        create_endpoint: `${baseURL}/api/post/create/`,
+        create_endpoint: `${baseURL}/api/post/creates/`,
+        update_endpoint: slug => `${baseURL}/api/post/${slug}/update/`,
     }
 }
