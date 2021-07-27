@@ -2,7 +2,9 @@ const baseURL = process.env.NODE_ENV === "development"? "http://127.0.0.1:8000" 
 
 export const api = {
     auth:{
-        login: `${baseURL}/dj-rest-auth/login/`
+        login: `${baseURL}/dj-rest-auth/login/`,
+        signup: `${baseURL}/dj-rest-auth/registration/`,
+
     },
     get:{
         list_endpoint:`${baseURL}/api/posts/`,

@@ -10,7 +10,9 @@ import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 // import style manually
 import 'react-markdown-editor-lite/lib/index.css';
-import { useParams } from 'react-router-dom'
+import { Redirect, useParams } from 'react-router-dom'
+import { authAxios } from '../services/authentication-services'
+
 
  
 
@@ -47,17 +49,17 @@ const PostUpdateForm = ({postSlug, initialTitle, initialContent, initialThumbnai
         console.log(content)
         console.log(FormData)
 
-        axios.put(api.post.update_endpoint(postSlug),formData,{
+        authAxios.put(api.post.update_endpoint(postSlug),formData,{
             "headers":{
                 "Content-Type":"multipart/form-data",
-                "Authorization":"Token 61c1d3b0770ca6d9ede2b49ca4cd7ec6c07a408d"
             }
         })
         .then(res=>{
             console.log(res);
             setLoading(false);
             // redirect to the post list page
-            history.push("/");
+            // history.push("/");
+            history.back()
 
         })
         .catch(
@@ -135,6 +137,10 @@ const PostUpdate = ()=>{
     
     const {postSlug} = useParams()    
     const {data, loading, error} = useFetch(api.get.post_detail_endpoint(postSlug))
+
+    if (data && data.is_author === false){
+        return <Redirect to="/"/>
+    }
 
     return (
         <div>

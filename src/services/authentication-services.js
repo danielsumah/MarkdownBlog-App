@@ -27,7 +27,17 @@ function login(username, email, password){
         localStorage.setItem("token", res.data.key)
         return res
     })
+}
 
+function signup(username, email, password1, password2){
+    return axios.post(api.auth.signup, {
+        username, email, password1, password2
+    })
+    .then(res=>{
+        console.log(res.data.key)
+        localStorage.setItem("token", res.data.key)
+        return res
+    })
 }
 
 function logout(){
@@ -39,7 +49,8 @@ function logout(){
 const authenticationService = {
     isAuthenticated : isAuthenticated(),
     logout,
-    login
+    login,
+    signup
 }
 
 export { authAxios, authenticationService}

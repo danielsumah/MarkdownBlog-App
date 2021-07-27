@@ -10,6 +10,8 @@ import PostCreate from './containers/PostCreate'
 import PostUpdate from './containers/PostUpdate'
 import PostDelete from './containers/PostDelete'
 import Login from './containers/Login'
+import Signup from './containers/Signup';
+import PrivateRoute from './containers/PrivateRoute';
 
 const history = createBrowserHistory();
 
@@ -19,11 +21,12 @@ function App() {
       <Layout>
         <Switch>
           <Route exact path="/" component={PostList} />
-          <Route exact path="/create" component={PostCreate} />
+          <PrivateRoute exact path="/create" component={PostCreate} />
           <Route exact path="/post/:postSlug" component={PostDetail} />
           <Route exact path="/post/:postSlug/update" component={PostUpdate} />
           <Route exact path="/post/:postSlug/delete" component={PostDelete} />
           <Route exact path="/login" component={Login}/>
+          <Route exact path="/signup" component={Signup}/>
         </Switch>
       </Layout>
     </Router>

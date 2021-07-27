@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { authAxios, authenticationService } from "../services/authentication-services";
 
 export const useFetch=(endpoint, initialData=[])=>{
     const [data, setData] = useState(initialData);
@@ -15,7 +16,11 @@ export const useFetch=(endpoint, initialData=[])=>{
         setLoading(true);
 
         try {
-            const res = await axios.get(endpoint);
+            let ax = axios
+            if (authenticationService.isAuthenticated){
+                ax = authAxios
+            }
+            const res = await ax.get(endpoint);
             const data = res.data
             setData(data)
             setLoading(false);

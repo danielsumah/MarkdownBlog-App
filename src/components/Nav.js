@@ -45,11 +45,20 @@ const Nav = () => {
                             />
                         </NavLink>
                     ) : (
+                        <>
                         <NavLink to="/login">
                             <Menu.Item
                                 name='login'
                             />
                         </NavLink>
+                        
+
+                        <NavLink to="/signup">
+                            <Menu.Item
+                                name='Signup'
+                            />
+                        </NavLink>
+                        </>
                     )}                   
                     
                 </Menu.Menu>

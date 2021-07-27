@@ -97,6 +97,7 @@ function DeleteModal({title, thumbnail, postSlug}) {
 const PostDetail = () => {
     const {postSlug} = useParams()    
     const {data, loading, error} = useFetch(api.get.post_detail_endpoint(postSlug))
+    console.log(data)
 
     return (
         <div>
@@ -113,7 +114,7 @@ const PostDetail = () => {
                 {loading && <Loaders />}
                 {error && <Message negative message={error} />}
 
-                {data && (
+                {data.is_author && (
                     <>
                         {/* <p>{data.content}</p> */}
                         <ReactMarkdown>{data.content}</ReactMarkdown>
