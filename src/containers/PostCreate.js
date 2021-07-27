@@ -1,10 +1,10 @@
 import React, {useRef} from 'react'
 import { Button, Header, Form } from 'semantic-ui-react'
 import { useState } from 'react'
-import axios from 'axios'
 import Message from '../components/Message'
 import { history } from '../helpers'
 import { api } from '../api'
+import { authAxios } from '../services/authentication-services'
 
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
@@ -42,17 +42,16 @@ const PostCreate = () => {
         formData.append('content', content)
         formData.append('thumbnail', thumbnail)
 
-        console.log(content)
-        console.log(FormData)
+        // console.log(content)
+        // console.log(FormData)
 
-        axios.post(api.post.create_endpoint,formData,{
+        authAxios.post(api.post.create_endpoint,formData,{
             "headers":{
                 "Content-Type":"multipart/form-data",
-                "Authorization":"Token 61c1d3b0770ca6d9ede2b49ca4cd7ec6c07a408d"
             }
         })
         .then(res=>{
-            console.log(res);
+            // console.log(res);
             setLoading(false);
             // redirect to the post list page
             history.push("/");
@@ -60,7 +59,7 @@ const PostCreate = () => {
         })
         .catch(
             err => {
-                console.log(err.message)
+                // console.log(err.message)
                 setError(err.message)
                 setLoading(false)
             }
@@ -70,7 +69,6 @@ const PostCreate = () => {
     return (
         <div>
             <Header>Create a new post</Header>
-            {error && <Message negative message={error}/>}
             <Form onSubmit={submit_form}>
                 <Form.Field>
                 <label>Post Title</label>
@@ -117,6 +115,8 @@ const PostCreate = () => {
                     Create Post
                 </Button>
             </Form>
+            
+            {error && <Message negative message={error}/>}
         
         </div>
     

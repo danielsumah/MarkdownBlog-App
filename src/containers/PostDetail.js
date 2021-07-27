@@ -19,7 +19,8 @@ import Loaders from '../components/Loader';
 import { api } from '../api';
 import { useFetch } from '../helpers';
 import { useParams } from 'react-router';
-import axios from 'axios';
+// import axios from 'axios';
+import { authAxios } from '../services/authentication-services';
 import { history } from '../helpers';
 // import { Button, Header, Image, Modal } from 'semantic-ui-react'
 
@@ -33,14 +34,13 @@ function DeleteModal({title, thumbnail, postSlug}) {
     function delete_post(){
         setLoading(true);
 
-        axios.delete(api.delete.delete_endpoint(postSlug),{
+        authAxios.delete(api.delete.delete_endpoint(postSlug),{
             "headers":{
                 "Content-Type":"multipart/form-data",
-                "Authorization":"Token 61c1d3b0770ca6d9ede2b49ca4cd7ec6c07a408d"
             }
         })
         .then(res=>{
-            console.log(res);
+            // console.log(res);
             setLoading(false);
             // redirect to the post list page
             history.push("/");
@@ -48,7 +48,7 @@ function DeleteModal({title, thumbnail, postSlug}) {
         })
         .catch(
             err => {
-                console.log(err.message)
+                // console.log(err.message)
                 setError(err.message)
                 setLoading(false)
             }
@@ -80,10 +80,10 @@ function DeleteModal({title, thumbnail, postSlug}) {
         {loading && <Loaders />}
         {error && <Message negative message={error} />}
         <Button color='black' onClick={() => setOpen(false)}>
-          Nope
+          No
         </Button>
         <Button
-          content="Delete"
+          content="Yes"
           labelPosition='right'
           icon='trash'
           onClick={delete_post}

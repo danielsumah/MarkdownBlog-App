@@ -1,46 +1,58 @@
-import React, { Component } from 'react'
+import React from 'react';
+import { useState } from 'react';
 import { Menu } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
-export default class Nav extends Component {
-    state = { activeItem: 'home' }
-
-    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
-    render() {
-        const { activeItem } = this.state
-
-        return (
-            <div>
-                <Menu pointing secondary>
-                    <NavLink to="/">
-                        <Menu.Item
-                            name='home'
-                            active={activeItem === 'home'}
-                            onClick={this.handleItemClick}
-                        />
-                    </NavLink>
-
-                    <NavLink to="/create">
-                        <Menu.Item
-                            name='Create Post'
-                            active={activeItem === 'Create Post'}
-                            onClick={this.handleItemClick}
-                        />
-                    </NavLink>
+import { authenticationService } from '../services/authentication-services';
 
 
-                    <Menu.Menu position='right'>
-                        <Menu.Item
-                            name='logout'
-                            active={activeItem === 'logout'}
-                            onClick={this.handleItemClick}
-                        />
+const Nav = () => {
+    const [activeItem, setActiveItem] = useState('home')
 
-                    </Menu.Menu>
-                </Menu>
-            </div>
-        )
-    }
+    const handleItemClick=(e)=>{
+        // setActiveItem()
+        console.log(e.target.innerText)
+        setActiveItem(e.target.innerText)
+        }
+    
+
+    return (
+        <div>
+            <Menu pointing secondary>
+                <NavLink to="/">
+                    <Menu.Item
+                        name='home'
+                    />
+                </NavLink>
+
+                <NavLink to="/create">
+                    <Menu.Item
+                        name='Create Post'
+                    />
+                </NavLink>
+
+
+                <Menu.Menu position='right'>
+                    {authenticationService.isAuthenticated ? (
+                        <NavLink to="/" onClick={()=>authenticationService.logout()}>
+                            <Menu.Item
+                                name='logout'
+                            />
+                        </NavLink>
+                    ) : (
+                        <NavLink to="/login">
+                            <Menu.Item
+                                name='login'
+                            />
+                        </NavLink>
+                    )}                   
+                    
+                </Menu.Menu>
+
+            </Menu>
+        </div>
+    )
+    
 }
 
+export default Nav;
 

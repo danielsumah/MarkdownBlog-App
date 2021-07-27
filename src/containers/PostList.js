@@ -5,6 +5,7 @@ import Message from '../components/Message'
 import { NavLink } from 'react-router-dom'
 import { api } from '../api'
 import { useFetch } from '../helpers'
+import './postlist.css'
 
 
 const PostList = () => {
@@ -13,7 +14,7 @@ const PostList = () => {
 
     return (
         <div>
-            <Header>Post list</Header>
+            <Header>Recent Posts</Header>
 
             {loading && <Loaders />}
             {error && <Message negative message={error} />}
@@ -28,7 +29,7 @@ const PostList = () => {
                                     <Item.Header as='a'>{post.title}</Item.Header>
                                 </NavLink>
                                 <Item.Description>
-                                    <p>
+                                    <p className="hide-part">
                                         {post.content}
                                     </p>
                                 </Item.Description>
