@@ -20,12 +20,9 @@ const Login = () => {
         e.preventDefault();
         setLoading(true)
         
-        axios.post(api.auth.login, {
-            username, email, password
-        })
+        authenticationService.login(username, email, password)
         .then(res =>{
-            localStorage.setItem("token", res.data.key)
-            console.log(res.data.key)
+            // console.log(res.data.key)
             setLoading(false)
             setError(null)
             history.push("/")

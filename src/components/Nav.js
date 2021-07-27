@@ -24,11 +24,17 @@ const Nav = () => {
                     />
                 </NavLink>
 
-                <NavLink to="/create">
-                    <Menu.Item
-                        name='Create Post'
-                    />
-                </NavLink>
+                {authenticationService.isAuthenticated ? (
+                    <NavLink to="/create">
+                        <Menu.Item
+                            name='Create Post'
+                        />
+                    </NavLink>
+                ):(
+                    <span></span>
+                    
+                )}
+                
 
 
                 <Menu.Menu position='right'>
