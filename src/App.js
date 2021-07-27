@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import 'semantic-ui-css/semantic.min.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { createBrowserHistory } from "history";
+
+import Layout from './containers/Layout'
+import PostList from './containers/PostList'
+import PostDetail from './containers/PostDetail'
+import PostCreate from './containers/PostCreate'
+import PostUpdate from './containers/PostUpdate'
+import PostDelete from './containers/PostDelete'
+import Login from './containers/Login'
+
+const history = createBrowserHistory();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={history}>
+      <Layout>
+        <Switch>
+          <Route exact path="/" component={PostList} />
+          <Route exact path="/create" component={PostCreate} />
+          <Route exact path="/post/:postSlug" component={PostDetail} />
+          <Route exact path="/post/:postSlug/update" component={PostUpdate} />
+          <Route exact path="/post/:postSlug/delete" component={PostDelete} />
+          <Route exact path="/login" component={Login}/>
+        </Switch>
+      </Layout>
+    </Router>
   );
 }
 
