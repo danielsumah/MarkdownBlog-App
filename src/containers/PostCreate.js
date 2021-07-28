@@ -10,27 +10,29 @@ import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 // import style manually
 import 'react-markdown-editor-lite/lib/index.css';
-
- 
+import { Redirect } from 'react-router-dom'
 
 const PostCreate = () => {
-
     const file_input_ref = useRef()
-
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [thumbnail, setThumbnail] = useState(null);
 
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(null);
+
+    const [redirect, setRedirect] = useState(false);
 
         // Initialize a markdown parser
     const mdParser = new MarkdownIt(/* Markdown-it options */);
-
-    // Finish!
     function handleEditorChange({ html, text }) {
-        // console.log('handleEditorChange', html, text);
         setContent(text)
+    }
+
+    if(redirect){
+        return (
+            <Redirect to="/" />
+        )
     }
 
     function submit_form(e){
@@ -42,19 +44,15 @@ const PostCreate = () => {
         formData.append('content', content)
         formData.append('thumbnail', thumbnail)
 
-        // console.log(content)
-        // console.log(FormData)
-
         authAxios.post(api.post.create_endpoint,formData,{
             "headers":{
                 "Content-Type":"multipart/form-data",
             }
         })
         .then(res=>{
-            // console.log(res);
             setLoading(false);
-            // redirect to the post list page
-            history.push("/");
+            // history.push();
+            setRedirect(true)
 
         })
         .catch(
