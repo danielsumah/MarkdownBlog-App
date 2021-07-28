@@ -10,7 +10,9 @@ import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 // import style manually
 import 'react-markdown-editor-lite/lib/index.css';
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
+
+
 
 const PostCreate = () => {
     const file_input_ref = useRef()
@@ -29,11 +31,16 @@ const PostCreate = () => {
         setContent(text)
     }
 
+    const history2 = useHistory()
+    
     if(redirect){
-        return (
-            <Redirect to="/" />
-        )
+        history2.push('/')
+        // return (
+        //     <Redirect to="/" />
+        // )
     }
+
+    
 
     function submit_form(e){
         e.preventDefault();
@@ -53,6 +60,7 @@ const PostCreate = () => {
             setLoading(false);
             // history.push();
             setRedirect(true)
+            
 
         })
         .catch(
