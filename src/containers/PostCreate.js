@@ -32,7 +32,7 @@ const PostCreate = () => {
     }
 
     const history2 = useHistory()
-    
+
     if(redirect){
         history2.push('/')
         // return (
@@ -59,7 +59,8 @@ const PostCreate = () => {
         .then(res=>{
             setLoading(false);
             // history.push();
-            setRedirect(true)
+            // setRedirect(true)
+            history2.push('/')
             
 
         })
