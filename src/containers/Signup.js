@@ -1,14 +1,15 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { Button, Form, Header } from 'semantic-ui-react';
 import { api } from '../api';
 import Loaders from '../components/Loader';
 import Message from '../components/Message';
-import { history } from '../helpers';
 import { authenticationService } from '../services/authentication-services';
 
 const Signup = () => {
+    const history = useHistory();
+    
     const [username, setUsername] =  useState("");
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -30,7 +31,7 @@ const Signup = () => {
         })
         .catch(error =>{
             setLoading(false)
-            setError(error.message || error)
+            setError(error.message)
             console.log(error)
         })
 

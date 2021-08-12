@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { Button, Form, Header } from 'semantic-ui-react';
 import { api } from '../api';
 import Loaders from '../components/Loader';
 import Message from '../components/Message';
-import { history } from '../helpers';
+// import { history } from '../helpers';
 import { authenticationService } from '../services/authentication-services';
 
 const Login = () => {
@@ -15,6 +15,8 @@ const Login = () => {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null)
+
+    const history = useHistory()
 
     function user_login(e){
         e.preventDefault();
@@ -26,6 +28,7 @@ const Login = () => {
             setLoading(false)
             setError(null)
             history.push("/")
+            window.location.reload()
         })
         .catch(error =>{
             setLoading(false)

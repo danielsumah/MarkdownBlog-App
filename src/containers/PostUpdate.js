@@ -35,6 +35,7 @@ const PostUpdateForm = ({postSlug, initialTitle, initialContent, initialThumbnai
     function handleEditorChange({ html, text }) {
         // console.log('handleEditorChange', html, text);
         setContent(text)
+        console.log(title)
     }
 
     function submit_form(e){
@@ -73,7 +74,7 @@ const PostUpdateForm = ({postSlug, initialTitle, initialContent, initialThumbnai
 
     return (
         <div>
-            <Header>Update Post</Header>
+            <Header>Update Post: {title} </Header>
             <Divider/>
             {error && <Message negative message={error}/>}
             <Form onSubmit={submit_form}>

@@ -1,5 +1,6 @@
 const baseURL = process.env.NODE_ENV === "development"? "http://127.0.0.1:8000" : "https://mydomain.com"
 
+// const baseURL = "https://write-blog-api.herokuapp.com"
 export const api = {
     auth:{
         login: `${baseURL}/dj-rest-auth/login/`,
@@ -7,12 +8,12 @@ export const api = {
 
     },
     get:{
-        list_endpoint:`${baseURL}/api/posts/`,
+        list_endpoint:`${baseURL}/api/get-posts/`,
         post_detail_endpoint: slug => `${baseURL}/api/post/${slug}/`,
     },
 
     post:{
-        create_endpoint: `${baseURL}/api/post/create/`,
+        create_endpoint: `${baseURL}/api/create-post/`,
         update_endpoint: slug => `${baseURL}/api/post/${slug}/update/`,
     },
 

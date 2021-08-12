@@ -4,3 +4,10 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+.single-post {
+  margin-bottom: 25px;
+}
+.warning {
+  color: red;
+}

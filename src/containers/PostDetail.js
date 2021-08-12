@@ -113,11 +113,11 @@ const PostDetail = () => {
 
                 {loading && <Loaders />}
                 {error && <Message negative message={error} />}
-
-                {data.is_author && (
+                {data && <ReactMarkdown>{data.content}</ReactMarkdown>}
+                {data.is_author ? (
                     <>
                         {/* <p>{data.content}</p> */}
-                        <ReactMarkdown>{data.content}</ReactMarkdown>
+                        
 
                         <NavLink to={`/post/${data.slug}/update`} >
                             <Button icon labelPosition='left'>
@@ -132,7 +132,9 @@ const PostDetail = () => {
                             postSlug={postSlug}/>
 
                     </>
-                )}            
+                ) : (<p className='warning'>You cannot modify a post you did not create</p>)}    
+
+        
             </Container>
         
         </div>

@@ -21,7 +21,7 @@ const PostList = () => {
             <Item.Group>
                 {data.map(post => (
                     <div key={post.id}>
-                        <Item>
+                        <Item className="single-post">
                             <Item.Image size='small' src={post.thumbnail} />
 
                             <Item.Content>
@@ -32,6 +32,9 @@ const PostList = () => {
                                     <p className="hide-part">
                                         {post.content}
                                     </p>
+                                    <NavLink to={`/post/${post.slug}`} >
+                                        <span>read more ... </span>
+                                    </NavLink>
                                 </Item.Description>
                             </Item.Content>
                         </Item>

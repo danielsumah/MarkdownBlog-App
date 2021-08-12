@@ -1,10 +1,15 @@
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 import { api } from "../api";
+
+
 
 const authAxios = axios.create()
 authAxios.interceptors.request.use(config =>{
     const newConfig = config;
     const token = localStorage.getItem("token");
+    
+    // console.log(token);
 
     newConfig.headers = {
         "Authorization": `Token ${token}`
@@ -42,7 +47,8 @@ function signup(username, email, password1, password2){
 
 function logout(){
     localStorage.removeItem("token")
-    alert('logged out')
+    alert('logged out')    
+
 }
 
 

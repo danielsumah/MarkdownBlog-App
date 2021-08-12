@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
     return (
         <>
             <Nav />
-            <Container text style={{ marginTop: '7em' }}>
+            <Container text style={{ marginTop: '3em' }}>
                 {children}
             </Container>
         </>
